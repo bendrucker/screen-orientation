@@ -1,6 +1,7 @@
 'use strict'
 
 var window = require('global/window')
+var viewSize = require('view-size')
 
 var screen = window.screen
 if (screen) {
@@ -18,8 +19,9 @@ function screenOrientation () {
 }
 
 function defaults () {
+  var viewport = viewSize()
   return {
-    direction: 'landscape',
+    direction: viewport.x >= viewport.y ? 'landscape' : 'portrait',
     version: 'primary'
   }
 }
