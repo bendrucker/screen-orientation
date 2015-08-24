@@ -1,7 +1,7 @@
 {
   "name": "screen-orientation",
   "main": "index.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Get the current screen orientation",
   "license": "MIT",
   "repository": "bendrucker/screen-orientation",
