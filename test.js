@@ -3,7 +3,7 @@
 var test = require('tape')
 var proxyquire = require('proxyquire')
 
-test(function (t) {
+test('with orientation', function (t) {
   var orientation = proxyquire('./', {
     'global/window': {
       screen: {
@@ -13,6 +13,15 @@ test(function (t) {
       }
     }
   })
+  t.deepEqual(orientation(), {
+    direction: 'landscape',
+    version: 'primary'
+  })
+  t.end()
+})
+
+test('defaults', function (t) {
+  var orientation = require('./')
   t.deepEqual(orientation(), {
     direction: 'landscape',
     version: 'primary'
