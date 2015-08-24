@@ -6,6 +6,7 @@ module.exports = function screenOrientation () {
   var screen = window.screen
   if (!screen) return null
   var orientation = screen.orientation || screen.mozOrientation || screen.msOrientation
+  if (!orientation) return null
   var parts = orientation.type.split('-')
   return {
     direction: parts[0],
