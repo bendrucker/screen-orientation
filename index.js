@@ -8,7 +8,7 @@ if (screen) {
   var orientation = screen.orientation || screen.mozOrientation || screen.msOrientation
 }
 
-module.exports = orientation ? screenOrientation : defaults
+module.exports = (orientation && orientation.type) ? screenOrientation : detect
 
 function screenOrientation () {
   var parts = orientation.type.split('-')
@@ -18,7 +18,7 @@ function screenOrientation () {
   }
 }
 
-function defaults () {
+function detect () {
   var viewport = viewSize()
   return {
     direction: viewport.x >= viewport.y ? 'landscape' : 'portrait',
