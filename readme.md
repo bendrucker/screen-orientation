@@ -1,4 +1,4 @@
-# screen-orientation [![Build Status](https://travis-ci.org/bendrucker/screen-orientation.svg?branch=master)](https://travis-ci.org/bendrucker/screen-orientation)
+# screen-orientation [![Build Status](https://travis-ci.org/bendrucker/screen-orientation.svg?branch=master)](https://travis-ci.org/bendrucker/screen-orientation) [![Greenkeeper badge](https://badges.greenkeeper.io/bendrucker/screen-orientation.svg)](https://greenkeeper.io/)
 
 > Get the current screen orientation
 
