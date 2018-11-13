@@ -18,8 +18,8 @@
     "orientation"
   ],
   "devDependencies": {
-    "proxyquire": "~1.7.1",
-    "standard": "^4.0.0",
+    "proxyquire": "~2.1.0",
+    "standard": "^12.0.1",
     "tape": "^4.0.0"
   },
   "files": [
