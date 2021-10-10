@@ -8,24 +8,25 @@
   "author": {
     "name": "Ben Drucker",
     "email": "bvdrucker@gmail.com",
-    "url": "bendrucker.me"
+    "url": "http://bendrucker.me"
   },
   "scripts": {
-    "test": "standard && tape test.js"
+    "test": "standard --env jest && jest"
   },
   "keywords": [
     "screen",
     "orientation"
   ],
   "devDependencies": {
-    "proxyquire": "~2.1.0",
-    "standard": "^13.0.1",
-    "tape": "^4.0.0"
+    "jest": "^27.2.5",
+    "standard": "^13.0.1"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "getScreen.js"
   ],
   "dependencies": {
+    "debounce": "^1.2.1",
     "global": "~4.3.0",
     "view-size": "~1.0.1"
   }

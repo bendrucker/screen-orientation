@@ -9,21 +9,61 @@
 $ npm install --save screen-orientation
 ```
 
+or 
+
+```
+$ npm add screen-orientation
+```
+
 
 ## Usage
 
-```js
-var screenOrientation = require('screen-orientation')
+Import module
 
-screenOrientation()
-//=> {direction: 'landscape', version: 'primary'}
+```js
+const sc = require('screen-orientation')
+```
+
+```js
+sc.getScreenOrientation()
+//=> {direction: 'landscape', version: 'primary', angle: 0}
+```
+
+```js
+sc.addEventOnOrientationChange((newOrientation) => {
+  console.log(newOrientation)
+  //=> {direction: 'landscape', version: 'primary', angle: 0}
+})
+```
+
+```js
+sc.removeEventOnOrientationChange()
+//=> void
 ```
 
 ## API
 
-#### `screenOrientation()` -> `object`
+#### `getScreenOrientation()` -> `object`
 
-Returns the current screen orientation (direction and version).
+Returns the current screen orientation (direction, version and angle).
+
+#### `addEventOnOrientationChange(callback)` -> `void`
+
+Add a callback function when screen orientation is changed
+
+Example:
+```js
+const refreshFrames(newOrientation) {
+  // myFunction (newOrientation.direction, newOrientation.version)
+};
+
+sc.addEventOnOrientationChange(refreshFrames)
+```
+
+#### `removeEventOnOrientationChange()` -> `void`
+
+Remove a callback function when screen orientation is changed
+```
 
 ## License
 
