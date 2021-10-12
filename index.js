@@ -65,11 +65,11 @@ function formatResizeEvent (resizeEvent) {
 }
 
 function handleOrientationChange (event) {
-  return () => handlerCallback(getScreenOrientation(event))
+  return handlerCallback(getScreenOrientation(event.target))
 }
 
 function handleResize (event) {
-  return debounce(() => handlerCallback(formatResizeEvent(event)), 100)()
+  return debounce(() => handlerCallback(getScreenOrientation(formatResizeEvent(event))), 100)()
 }
 
 const screenOrientationModule = module.exports = getScreenOrientation
