@@ -3,31 +3,11 @@
 const viewSize = require('view-size')
 const window = require('global/window')
 const debounce = require('debounce')
-const getScreen = require('./getScreen')
 
 let handlerCallback
 
-function shouldUseOrientation () {
-  return (getScreen() !== undefined && getScreen().orientation !== undefined)
-}
-
-function getOrientation () {
-  return shouldUseOrientation()
-    ? getScreen().orientation
-    : detect()
-}
-
-function detect () {
-  const { x, y } = viewSize()
-
-  return {
-    type: x >= y ? 'landscape-primary' : 'portrait-primary',
-    angle: 0
-  }
-}
-
-function getScreenOrientation () {
-  const { type, angle } = getOrientation()
+function getScreenOrientation (orientationEvent) {
+  const { type, angle } = orientationEvent || getOrientation()
   const [direction, version] = type.split('-')
 
   return {
@@ -41,26 +21,59 @@ function addEventOnOrientationChange (callback) {
   handlerCallback = callback
 
   if (shouldUseOrientation()) {
-    getScreen().orientation.addEventListener('change', handleOrientationChange, false)
+    window.screen.orientation.addEventListener('change', handleOrientationChange, false)
   } else {
-    window.addEventListener('resize', handleOrientationChange, false)
+    window.addEventListener('resize', handleResize, false)
   }
 }
 
 function removeEventOnOrientationChange () {
   if (shouldUseOrientation()) {
-    getScreen().orientation.removeEventListener('change', handleOrientationChange)
+    window.screen.orientation.removeEventListener('change', handleOrientationChange)
   } else {
-    window.removeEventListener('resize', handleOrientationChange)
+    window.removeEventListener('resize', handleResize)
   }
 }
 
-function handleOrientationChange () {
-  return debounce(() => handlerCallback(getScreenOrientation()), 100)()
+function shouldUseOrientation () {
+  return (window.screen !== undefined && window.screen.orientation !== undefined)
 }
 
-module.exports = {
-  getScreenOrientation,
-  addEventOnOrientationChange,
-  removeEventOnOrientationChange
+function getOrientation () {
+  return shouldUseOrientation()
+    ? window.screen.orientation
+    : detect()
 }
+
+function detect () {
+  const { x, y } = viewSize()
+
+  return {
+    type: x >= y ? 'landscape-primary' : 'portrait-primary',
+    angle: 0
+  }
+}
+
+function formatResizeEvent (resizeEvent) {
+  const x = resizeEvent.target.innerWidth
+  const y = resizeEvent.target.innerHeight
+
+  return {
+    type: x >= y ? 'landscape-primary' : 'portrait-primary',
+    angle: 0
+  }
+}
+
+function handleOrientationChange (event) {
+  return () => handlerCallback(getScreenOrientation(event))
+}
+
+function handleResize (event) {
+  return debounce(() => handlerCallback(formatResizeEvent(event)), 100)()
+}
+
+const screenOrientationModule = module.exports = getScreenOrientation
+
+screenOrientationModule.getScreenOrientation = getScreenOrientation
+screenOrientationModule.addEventOnOrientationChange = addEventOnOrientationChange
+screenOrientationModule.removeEventOnOrientationChange = removeEventOnOrientationChange

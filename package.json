@@ -11,19 +11,19 @@
     "url": "http://bendrucker.me"
   },
   "scripts": {
-    "test": "standard --env jest && jest"
+    "test": "standard && tape test.js"
   },
   "keywords": [
     "screen",
     "orientation"
   ],
   "devDependencies": {
-    "jest": "^27.2.5",
-    "standard": "^13.0.1"
+    "proxyquire": "~2.1.0",
+    "standard": "^13.0.1",
+    "tape": "^4.0.0"
   },
   "files": [
-    "index.js",
-    "getScreen.js"
+    "index.js"
   ],
   "dependencies": {
     "debounce": "^1.2.1",

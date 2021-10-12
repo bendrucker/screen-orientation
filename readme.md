@@ -21,33 +21,42 @@ $ npm add screen-orientation
 Import module
 
 ```js
-const sc = require('screen-orientation')
+const screenOrientation = require('screen-orientation')
 ```
 
 ```js
-sc.getScreenOrientation()
+screenOrientation()
+//=> {direction: 'landscape', version: 'primary', angle: 0}
+```
+Or
+```js
+screenOrientation.getScreenOrientation()
 //=> {direction: 'landscape', version: 'primary', angle: 0}
 ```
 
 ```js
-sc.addEventOnOrientationChange((newOrientation) => {
+screenOrientation.addEventOnOrientationChange((newOrientation) => {
   console.log(newOrientation)
   //=> {direction: 'landscape', version: 'primary', angle: 0}
 })
 ```
 
 ```js
-sc.removeEventOnOrientationChange()
+screenOrientation.removeEventOnOrientationChange()
 //=> void
 ```
 
 ## API
 
-#### `getScreenOrientation()` -> `object`
+#### `screenOrientation()` -> `object`
 
 Returns the current screen orientation (direction, version and angle).
 
-#### `addEventOnOrientationChange(callback)` -> `void`
+#### `screenOrientation.getScreenOrientation()` -> `object`
+
+Returns the current screen orientation (direction, version and angle).
+
+#### `screenOrientation.addEventOnOrientationChange(callback)` -> `void`
 
 Add a callback function when screen orientation is changed
 
@@ -57,10 +66,10 @@ const refreshFrames(newOrientation) {
   // myFunction (newOrientation.direction, newOrientation.version)
 };
 
-sc.addEventOnOrientationChange(refreshFrames)
+screenOrientation.addEventOnOrientationChange(refreshFrames)
 ```
 
-#### `removeEventOnOrientationChange()` -> `void`
+#### `screenOrientation.removeEventOnOrientationChange()` -> `void`
 
 Remove a callback function when screen orientation is changed
 ```
